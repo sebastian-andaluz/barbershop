@@ -51,6 +51,10 @@ h6 {
   background-color: #212529 !important;
 }
 
+.bg-secondary {
+  background-color: #111 !important;
+}
+
 .text-faded {
   color: rgba(255, 255, 255, 0.7);
 }
@@ -156,8 +160,8 @@ img::-moz-selection {
     color: #fff;
   }
   #mainNav.navbar-shrink {
-    border-bottom: 1px solid rgba(33, 37, 41, 0.1);
-    background-color: #fff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: #212529;
   }
   #mainNav.navbar-shrink .navbar-brand {
     color: #ff1a1a;
@@ -167,7 +171,7 @@ img::-moz-selection {
   }
   #mainNav.navbar-shrink .navbar-nav > li.nav-item > a.nav-link,
   #mainNav.navbar-shrink .navbar-nav > li.nav-item > a.nav-link:focus {
-    color: #212529;
+    color: #fff;
   }
   #mainNav.navbar-shrink .navbar-nav > li.nav-item > a.nav-link:hover,
   #mainNav.navbar-shrink .navbar-nav > li.nav-item > a.nav-link:focus:hover {

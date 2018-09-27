@@ -56,8 +56,8 @@
       }
     }
     &.navbar-shrink {
-      border-bottom: 1px solid fade-out($gray-900, .9);
-      background-color: $white;
+      border-bottom: 1px solid fade-out($white, .9);
+      background-color: $gray-900;
       .navbar-brand {
         color: $primary;
         &:focus,
@@ -67,7 +67,7 @@
       }
       .navbar-nav > li.nav-item > a.nav-link,
       .navbar-nav > li.nav-item > a.nav-link:focus {
-        color: $gray-900;
+        color: $white;
         &:hover {
           color: $primary;
         }
