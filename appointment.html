@@ -66,7 +66,7 @@
           <div class="col-lg-8 mx-auto text-center">
             <h2 class="section-heading text-white">Schedule your haircut today!</h2>
             <hr class="light my-4">
-            <div id='calendar'>
+            <div id='calendar' style="cursor: pointer;">
               <script>
                 $(document).ready(function() {
                 
@@ -79,9 +79,14 @@
                     weekMode: 'liquid',
                     url: '#',
                     themeSystem: 'bootstrap4',
+                    cursor: 'pointer',
                   });
-                
-                });
+                  
+                  var calendar = $('#calendar').fullCalendar('getCalendar');
+                  calendar.on('dayClick', function(date, jsEvent, view) {
+                    console.log('clicked on ' + date.format());
+                  });
+              });
               </script>
             </div>
             <!-- <iframe src="https://calendar.google.com/calendar/embed?title=Trimmer%20Trev&#39;s%20Barbershop&amp;height=600&amp;wkst=1&amp;bgcolor=%23ff0000&amp;src=8gbrujn1pns6tiiuho0j9u3rk0%40group.calendar.google.com&amp;color=%23B1365F&amp;ctz=America%2FNew_York" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe> -->            
