@@ -1,0 +1,14 @@
+.bg-dark-top-section {
+  background-color: #212529 !important;
+  padding: 5% 5% 1%;
+}
+
+.bg-secondary-middle-section {
+  background-color: #111 !important;
+  padding: 1% 5%;
+}
+
+.bg-dark-bottom-section{
+  background-color: #212529 !important;
+  padding: 5% 0%;
+}
