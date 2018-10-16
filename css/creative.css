@@ -228,6 +228,14 @@ header.masthead p {
   max-width: 400px;
 }
 
+.centered {
+  margin: 0px auto;
+}
+
+.text-centered {
+  text-align: center;
+}
+
 .portfolio-box {
   position: relative;
   display: block;
