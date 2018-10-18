@@ -29,6 +29,8 @@
     <script src='node_modules/jquery/dist/jquery.min.js'></script>
     <script src='node_modules/moment/min/moment.min.js'></script>
     <script src='node_modules/fullcalendar/dist/fullcalendar.js'></script>
+    
+    <script src='appointment.js'></script>
 
   </head>
 
@@ -67,35 +69,8 @@
             <h2 class="section-heading text-white">Schedule your haircut today!</h2>
             <hr class="light my-4">
             <div id='calendar' class="text-white" style="cursor: pointer;">
-              <script>
-                $(document).ready(function() {
-                
-                  // page is now ready, initialize the calendar...
-
-                  $('#calendar').fullCalendar({
-                    // put your options and callbacks here
-                    editable: true,
-                    eventLimit: true,
-                    weekMode: 'liquid',
-                    url: '#',
-                    themeSystem: 'bootstrap4',
-                    cursor: 'pointer',
-                    
-                    dayClick: function(date, jsEvent, view) {
-                      $('#popupModal').modal('show');
-                  
-                      // change the day's background color just for fun
-                      //$(this).css('background-color', 'red');
-                    
-                    }
-                  });
-                  
-                  var calendar = $('#calendar').fullCalendar('getCalendar');
-                  
-                  // calendar.on('dayClick', function(date, jsEvent, view) {
-                  //   console.log('clicked on ' + date.format());
-                  // });
-              });
+              <script id='script'>
+               
               </script>
             </div>
             <!-- <iframe src="https://calendar.google.com/calendar/embed?title=Trimmer%20Trev&#39;s%20Barbershop&amp;height=600&amp;wkst=1&amp;bgcolor=%23ff0000&amp;src=8gbrujn1pns6tiiuho0j9u3rk0%40group.calendar.google.com&amp;color=%23B1365F&amp;ctz=America%2FNew_York" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe> -->            
@@ -155,7 +130,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Schedule Service</button>
+            <button type="button" class="btn btn-primary" onclick="clicked()">Schedule Service</button>
           </div>
         </div>
       </div>
