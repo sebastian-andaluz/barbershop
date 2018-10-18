@@ -80,12 +80,21 @@
                     url: '#',
                     themeSystem: 'bootstrap4',
                     cursor: 'pointer',
+                    
+                    dayClick: function(date, jsEvent, view) {
+                      $('#popupModal').modal('show');
+                  
+                      // change the day's background color just for fun
+                      //$(this).css('background-color', 'red');
+                    
+                    }
                   });
                   
                   var calendar = $('#calendar').fullCalendar('getCalendar');
-                  calendar.on('dayClick', function(date, jsEvent, view) {
-                    console.log('clicked on ' + date.format());
-                  });
+                  
+                  // calendar.on('dayClick', function(date, jsEvent, view) {
+                  //   console.log('clicked on ' + date.format());
+                  // });
               });
               </script>
             </div>
@@ -96,7 +105,61 @@
         </div>
       </div>
     </section>
-
+    
+    <!-- Modal -->
+    <div class="modal fade" id="popupModal" tabindex="-1" role="dialog" aria-labelledby="popupModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="popupModalLabel">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <label for="">Name:</label>
+            <input type="text" id="customerName"/> <br/>
+            <label for="">Haircuts</label>
+            <select name="haircuts">
+                <option value="noHaircut">None</option>
+                <option value="fullHaircut">Full Haircut ($30)</option>
+                <option value="fullHaircutFacialHair">Full Haircut and Facial Hair ($40)</option>
+            </select>
+            <label for="">Deals and Specials</label>
+            <select name="dealsAndSpecials">
+              <option value="noDeals">None</option>
+              <option value="kidsCut">Kids Cuts ($20 and up)</option>
+              <option value="seniorCuts">Senior Cuts ($20)</option>
+              <option value="earlyBird">Early Bird/After Hours ($50)</option>
+              <option value="houseCalls">House Calls/Off-days ($100)</option>
+            </select>
+            <label for="">Additional Services</label>
+            <select name="additionalServices">
+              <option value="noAdditional">None</option>
+              <option value="curlSponge">Curl Sponge ($5)</option>
+              <option value="styled">Styled ($5)</option>
+              <option value="hardPart">Hard Part ($5)</option>
+              <option value="facialMask">Facial Mask ($5)</option>
+              <option value="lineUp">Line Up ($10)</option>
+              <otpion value-"eyebrows">Eyebrows ($10)</otpion>
+              <option value="facialHair">Facial Hair ($10)</option>
+              <option value="shampoo">Shampoo ($10)</option>
+              <option value="designs">Designs ($10)</option>
+              <option value="hotWax">Hot Wax ($10)</option>
+              <option value="color">Color ($20)</option>
+              <option value="hotTowel">Hot Towel ($20)</option>
+              <option value="shave">Shave ($20)</option>
+              <otpion value="taper">Taper ($20)</otpion>
+              <option value="fade">Fade (side only) ($25)</option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Schedule Service</button>
+          </div>
+        </div>
+      </div>
+    </div>
     
 
     
