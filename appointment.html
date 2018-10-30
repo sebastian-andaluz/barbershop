@@ -95,38 +95,41 @@
             <label for="">Name:</label>
             <input type="text" id="customerName"/> <br/>
             <label for="">Haircuts</label>
-            <select name="haircuts">
-                <option value="noHaircut">None</option>
-                <option value="fullHaircut">Full Haircut ($30)</option>
-                <option value="fullHaircutFacialHair">Full Haircut and Facial Hair ($40)</option>
+            <select name="haircuts" id="haircuts">
+                <option value="None">None</option>
+                <option value="Full Haircut">Full Haircut ($30)</option>
+                <option value="Full Haircut and Facial Hair">Full Haircut and Facial Hair ($40)</option>
             </select>
             <label for="">Deals and Specials</label>
-            <select name="dealsAndSpecials">
-              <option value="noDeals">None</option>
-              <option value="kidsCut">Kids Cuts ($20 and up)</option>
-              <option value="seniorCuts">Senior Cuts ($20)</option>
-              <option value="earlyBird">Early Bird/After Hours ($50)</option>
-              <option value="houseCalls">House Calls/Off-days ($100)</option>
+            <select name="dealsAndSpecials" id="dealsAndSpecials">
+              <option value="None">None</option>
+              <option value="Kids Cuts">Kids Cuts ($20 and up)</option>
+              <option value="Senior Cuts">Senior Cuts ($20)</option>
+              <option value="Early Bird">Early Bird/After Hours ($50)</option>
+              <option value="House Calls/Off-Days">House Calls/Off-days ($100)</option>
             </select>
             <label for="">Additional Services</label>
-            <select name="additionalServices">
-              <option value="noAdditional">None</option>
-              <option value="curlSponge">Curl Sponge ($5)</option>
-              <option value="styled">Styled ($5)</option>
-              <option value="hardPart">Hard Part ($5)</option>
-              <option value="facialMask">Facial Mask ($5)</option>
-              <option value="lineUp">Line Up ($10)</option>
-              <otpion value-"eyebrows">Eyebrows ($10)</otpion>
-              <option value="facialHair">Facial Hair ($10)</option>
-              <option value="shampoo">Shampoo ($10)</option>
-              <option value="designs">Designs ($10)</option>
-              <option value="hotWax">Hot Wax ($10)</option>
-              <option value="color">Color ($20)</option>
-              <option value="hotTowel">Hot Towel ($20)</option>
-              <option value="shave">Shave ($20)</option>
-              <otpion value="taper">Taper ($20)</otpion>
-              <option value="fade">Fade (side only) ($25)</option>
+            <select name="additionalServices" id="additionalServices">
+              <option value="None">None</option>
+              <option value="Curl Sponge">Curl Sponge ($5)</option>
+              <option value="Styled">Styled ($5)</option>
+              <option value="Hard Part">Hard Part ($5)</option>
+              <option value="Facial Mask">Facial Mask ($5)</option>
+              <option value="Lineup">Line Up ($10)</option>
+              <otpion value-"Eyebrows">Eyebrows ($10)</otpion>
+              <option value="Facial Hair">Facial Hair ($10)</option>
+              <option value="Shampoo">Shampoo ($10)</option>
+              <option value="Designs">Designs ($10)</option>
+              <option value="Hot Wax">Hot Wax ($10)</option>
+              <option value="Color">Color ($20)</option>
+              <option value="Hot Towel">Hot Towel ($20)</option>
+              <option value="Shave">Shave ($20)</option>
+              <otpion value="Taper">Taper ($20)</otpion>
+              <option value="Fade">Fade (side only) ($25)</option>
             </select>
+            <br/>
+            <label for="">Time:</label>
+            <input type="text" id="timeSlot"/>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

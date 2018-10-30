@@ -1,6 +1,7 @@
  $(document).ready(function() {
   // page is now ready, initialize the calendar...
-
+  var currentDate;
+  
   $('#calendar').fullCalendar({
     // put your options and callbacks here
     editable: true,
@@ -12,7 +13,8 @@
                 
     dayClick: function(date, jsEvent, view) {
       $('#popupModal').modal('show');
-  
+      //variable read across functions
+      currentDate = date;
       // change the day's background color just for fun
       //$(this).css('background-color', 'red');
     
@@ -28,11 +30,18 @@
   //var calendar = $('#calendar').fullCalendar('getCalendar');
   
     this.clicked = function(){
+      // alert(document.getElementById('timeSlot').value+':00');
+        //this sets the time
+        //TODO: separate between AM and PM
+        currentDate.time(document.getElementById('timeSlot').value);
+        
         $('#calendar').fullCalendar('renderEvent', {
-           title: 'Promo Haircut',
-           start: '2018-10-23',
-           allDay: true
+          title: document.getElementById('haircuts').value,
+          start: currentDate,
+          allDay: false,
         });
+        
+        //alert(document.getElementById('dealsAndSpecials').value);
     }
   
   // calendar.on('dayClick', function(date, jsEvent, view) {
