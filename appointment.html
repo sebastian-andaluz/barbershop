@@ -23,13 +23,13 @@
 
     <!-- Custom styles for this template -->
     <link href="css/creative.min.css" rel="stylesheet">
-    
+
     <!-- Calendar plugin FullCalendar.io -->
     <link rel='stylesheet' href='node_modules/fullcalendar/dist/fullcalendar.css' />
     <script src='node_modules/jquery/dist/jquery.min.js'></script>
     <script src='node_modules/moment/min/moment.min.js'></script>
     <script src='node_modules/fullcalendar/dist/fullcalendar.js'></script>
-    
+
     <script src='appointment.js'></script>
 
   </head>
@@ -70,10 +70,10 @@
             <hr class="light my-4">
             <div id='calendar' class="text-white" style="cursor: pointer;">
               <script id='script'>
-               
+
               </script>
             </div>
-            <!-- <iframe src="https://calendar.google.com/calendar/embed?title=Trimmer%20Trev&#39;s%20Barbershop&amp;height=600&amp;wkst=1&amp;bgcolor=%23ff0000&amp;src=8gbrujn1pns6tiiuho0j9u3rk0%40group.calendar.google.com&amp;color=%23B1365F&amp;ctz=America%2FNew_York" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe> -->            
+            <!-- <iframe src="https://calendar.google.com/calendar/embed?title=Trimmer%20Trev&#39;s%20Barbershop&amp;height=600&amp;wkst=1&amp;bgcolor=%23ff0000&amp;src=8gbrujn1pns6tiiuho0j9u3rk0%40group.calendar.google.com&amp;color=%23B1365F&amp;ctz=America%2FNew_York" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe> -->
             <p class="text-faded mb-4">The best barber in Fort Wayne.</p>
             <a class="btn btn-light btn-xl js-scroll-trigger" href="#services">Schedule</a>
             <a class="btn btn-light btn-xl js-scroll-trigger" id="cancelBtn" name="cancelBtn" onClick="cancelAppt()">Cancel</a>
@@ -81,7 +81,7 @@
         </div>
       </div>
     </section>
-    
+
     <!-- Modal -->
     <div class="modal fade" id="popupModal" tabindex="-1" role="dialog" aria-labelledby="popupModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -129,23 +129,23 @@
               <option value="Fade">Fade (side only) ($25)</option>
             </select>
             <br/>
-            <label for="">Time:</label>
-            <input type="text" id="timeSlot"/>
+            <!--<label for="">Time:</label>-->
+            <!--<input type="text" id="timeSlot"/>-->
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" onclick="clicked()">Schedule Service</button>
+            <button type="button" class="btn btn-primary" onclick="scheduleServiceClicked()">Schedule Service</button>
           </div>
         </div>
       </div>
     </div>
-    
+
     <div class="modal fade" id="keyModal" tabIndex="-1" role="dialog" aria-labelledby="keyModal" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="keyModal"> Here is your cancellation key if you wish to cancel up to a day before your appointment. Please Save it!</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close" onclick="scheduleServicesCloseClicked()"data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -155,7 +155,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="cancelModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -176,7 +176,7 @@
       </div>
     </div>
 
-    
+
     <!-- Bootstrap core JavaScript -->
     <!-- Commented out vendor path because Calendar uses one as well stored in a different location
          and the file paths conflict with each other -->

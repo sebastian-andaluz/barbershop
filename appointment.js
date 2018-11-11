@@ -1,6 +1,7 @@
  $(document).ready(function() {
   // page is now ready, initialize the calendar...
   var currentDate;
+  var date, jsEvent, view;
 
   $('#calendar').fullCalendar({
     // put your options and callbacks here
@@ -21,7 +22,7 @@
     },
 
     dayClick: function(date, jsEvent, view) {
-
+      console.log('Enter dayClick');
       if(view.type == 'agendaDay'){
         dayClickIsAgendaDay(date, jsEvent, view);
       } else if(view.type == 'month'){
@@ -32,30 +33,6 @@
     },
 
   });
-
-    this.clicked = function(){
-      // alert(document.getElementById('timeSlot').value+':00');
-        //this sets the time
-        //TODO: separate between AM and PM
-        currentDate.time(document.getElementById('timeSlot').value);
-        $('#popupModal').modal('hide');
-
-        var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-
-        var key = Array.apply(null, Array(6)).map(function() { return s.charAt(Math.floor(Math.random() * s.length)); }).join('');
-
-        document.getElementById("cancelKey").innerHTML = key;
-
-        $('#keyModal').modal('show');
-
-        $('#calendar').fullCalendar('renderEvent', {
-          title: document.getElementById('haircuts').value,
-          start: currentDate,
-          allDay: false,
-        });
-
-    }
-
   // calendar.on('dayClick', function(date, jsEvent, view) {
   //   console.log('clicked on ' + date.format());
   // });
@@ -67,14 +44,14 @@ $('#cancelModal').modal('show');
 }
 
 function dayClickIsAgendaDay(date, jsEvent, view){
-    console.log('Click was agendaDay');
-
-    $('#popupModal').modal('show');
+    console.log('Enter dayClickIsAgendaDay');
     //variable read across functions
-    currentDate = date;
+    this.date = date;
+    this.jsEvent = jsEvent;
+    this.view = view;
+    $('#popupModal').modal('show');
     // change the day's background color just for fun
     //$(this).css('background-color', 'red');
-
     //selectable: true,
     //events: events_array,
     //$('#calendar').fullCalendar('renderEvent')
@@ -84,7 +61,34 @@ function dayClickIsAgendaDay(date, jsEvent, view){
 }
 
 function dayClickIsMonth(date, jsEvent, view){
-    console.log('Click was Month');
+    console.log('Enter dayClickIsMonth');
     $('#calendar').fullCalendar('changeView', 'agendaDay');
     $('#calendar').fullCalendar('gotoDate', date);
+}
+
+function scheduleServiceClicked(){
+    console.log('Enter scheduleServiceClicked');
+  // alert(document.getElementById('timeSlot').value+':00');
+    //this sets the time
+    //TODO: separate between AM and PM
+    //this.currentDate.time(document.getElementById('timeSlot').value);
+    $('#popupModal').modal('hide');
+
+    var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+    var key = Array.apply(null, Array(6)).map(function() { return s.charAt(Math.floor(Math.random() * s.length)); }).join('');
+
+    document.getElementById("cancelKey").innerHTML = key;
+
+    $('#keyModal').modal('show');
+
+    $('#calendar').fullCalendar('renderEvent', {
+      title: document.getElementById('haircuts').value,
+      start: currentDate,
+      allDay: false,
+    });
+}
+
+function scheduleServicesCloseClicked(){
+    console.log('Enter scheduleServicesCloseClicked');
 }
