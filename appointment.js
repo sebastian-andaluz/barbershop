@@ -68,10 +68,13 @@ function dayClickIsMonth(date, jsEvent, view){
 
 function scheduleServiceClicked(){
     console.log('Enter scheduleServiceClicked');
-  // alert(document.getElementById('timeSlot').value+':00');
-    //this sets the time
-    //TODO: separate between AM and PM
-    //this.currentDate.time(document.getElementById('timeSlot').value);
+    this.view.title = document.getElementById('customerName').value;
+    let haircut = document.getElementById('haircuts').value;
+    let dealsOrSpecial = document.getElementById('dealsAndSpecials').value;
+    let additionalService = document.getElementById('additionalServices').value;
+
+    this.calculateAppointmentDuration(haircut, dealsOrSpecial, additionalService);
+
     $('#popupModal').modal('hide');
 
     var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -82,13 +85,55 @@ function scheduleServiceClicked(){
 
     $('#keyModal').modal('show');
 
-    $('#calendar').fullCalendar('renderEvent', {
-      title: document.getElementById('haircuts').value,
-      start: currentDate,
-      allDay: false,
-    });
+    $('#calendar').fullCalendar('renderEvent', jsEvent);
+    //$('#calendar').fullCalendar('renderEvent', {
+    //  title: document.getElementById('haircuts').value,
+    //  start: currentDate,
+    //  allDay: false,
+    //});
 }
 
 function scheduleServicesCloseClicked(){
+  //THIS IS JUST HERE TO EXPERIMENT WITH RENDERING EVENTS :)
     console.log('Enter scheduleServicesCloseClicked');
+    let start = moment(date);
+    let end = moment(start).add(.08, 'hour');
+    $('#calendar').fullCalendar('renderEvent', {
+      title: 'test title',
+      start: start,
+      end: end,
+      allDay: false,
+    });
+
+}
+
+function calculateAppointmentDuration(haircut, deals, services){
+    console.log('Haircut: ' + haircut + ' Deal: ' + deals + ' Service: ' + services);
+}
+
+function getHaircutDuration(haircut){
+    let totalDuration = .5;
+    if( haircut == 'Full Haircut and Facial Hair'){
+      totalDuration = totalDuration + .25;
+    }
+    return totalDuration;
+}
+
+function getServicesDuration(service){
+  let totalDuration = 0;
+  if (service == "Curl Sponge"){
+    totalDuration = totalDuration + .08; //5 minutes
+  } else if(false) {
+    totalDuration = totalDuration + .17; //10 minutes
+  }else if(false){
+    totalDuration = totalDuration + .25; //15 minutes
+  }else if(false){
+    totalDuration = totalDuration + .33; //20 minutes
+  }else if(false){
+    totalDuration = totalDuration + .5; //30 minutes
+  }else if(false){
+    totalDuration = totalDuration + .1;//60 minutes
+  }
+
+  return totalDuration;
 }
