@@ -10,6 +10,10 @@
     url: '#',
     themeSystem: 'bootstrap4',
     cursor: 'pointer',
+    header: {
+      left : 'title',
+      right : 'today, month, agendaDay, prev, next',
+    },
 
     dayClick: function(date, jsEvent, view) {
       $('#popupModal').modal('show');
