@@ -27,13 +27,20 @@
       }
   });
   
-  //var calendar = $('#calendar').fullCalendar('getCalendar');
-  
     this.clicked = function(){
       // alert(document.getElementById('timeSlot').value+':00');
         //this sets the time
         //TODO: separate between AM and PM
         currentDate.time(document.getElementById('timeSlot').value);
+        $('#popupModal').modal('hide');
+        
+        var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        
+        var key = Array.apply(null, Array(6)).map(function() { return s.charAt(Math.floor(Math.random() * s.length)); }).join('');
+        
+        document.getElementById("cancelKey").innerHTML = key;
+        
+        $('#keyModal').modal('show');
         
         $('#calendar').fullCalendar('renderEvent', {
           title: document.getElementById('haircuts').value,
@@ -41,10 +48,14 @@
           allDay: false,
         });
         
-        //alert(document.getElementById('dealsAndSpecials').value);
     }
   
   // calendar.on('dayClick', function(date, jsEvent, view) {
   //   console.log('clicked on ' + date.format());
   // });
+  
 });
+
+function cancelAppt() {
+$('#cancelModal').modal('show'); 
+}

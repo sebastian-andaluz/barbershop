@@ -76,6 +76,7 @@
             <!-- <iframe src="https://calendar.google.com/calendar/embed?title=Trimmer%20Trev&#39;s%20Barbershop&amp;height=600&amp;wkst=1&amp;bgcolor=%23ff0000&amp;src=8gbrujn1pns6tiiuho0j9u3rk0%40group.calendar.google.com&amp;color=%23B1365F&amp;ctz=America%2FNew_York" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe> -->            
             <p class="text-faded mb-4">The best barber in Fort Wayne.</p>
             <a class="btn btn-light btn-xl js-scroll-trigger" href="#services">Schedule</a>
+            <a class="btn btn-light btn-xl js-scroll-trigger" id="cancelBtn" name="cancelBtn" onClick="cancelAppt()">Cancel</a>
           </div>
         </div>
       </div>
@@ -139,6 +140,41 @@
       </div>
     </div>
     
+    <div class="modal fade" id="keyModal" tabIndex="-1" role="dialog" aria-labelledby="keyModal" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="keyModal"> Here is your cancellation key if you wish to cancel up to a day before your appointment. Please Save it!</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p id="cancelKey">A Paragraph.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="cancelModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="cancelModalLabel">Are you sure you want to cancel?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <label for="">Enter Cancellation Key:</label>
+            <input type="text" id="customerName"/> <br/>
+            <button type="button" class="btn btn-primary" onclick="confirmCancel()" style="display: block; margin: 0 auto; ">
+              Confirm Cancellation
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     
     <!-- Bootstrap core JavaScript -->
