@@ -21,14 +21,11 @@
         dayClickIsAgendaDay(date, jsEvent, view);
       } else if(view.type == 'month'){
         dayClickIsMonth(date, jsEvent, view);
+      } else{
+        console.log('Click from: ' +  view.type);
       }
     },
 
-      selectable: true,
-      //events: events_array,
-      eventRender: function(event, element) {
-          element.attr('title', event.tip);
-      }
   });
 
     this.clicked = function(){
@@ -72,8 +69,17 @@ function dayClickIsAgendaDay(date, jsEvent, view){
     currentDate = date;
     // change the day's background color just for fun
     //$(this).css('background-color', 'red');
+
+    //selectable: true,
+    //events: events_array,
+    //$('#calendar').fullCalendar('renderEvent')
+    //eventRender: function(event, element) {
+    //    element.attr('title', event.tip);
+    //}
 }
 
 function dayClickIsMonth(date, jsEvent, view){
     console.log('Click was Month');
+    $('#calendar').fullCalendar('changeView', 'agendaDay');
+    $('#calendar').fullCalendar('gotoDate', date);
 }
