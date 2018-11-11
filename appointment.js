@@ -68,12 +68,11 @@ function dayClickIsMonth(date, jsEvent, view){
 
 function scheduleServiceClicked(){
     console.log('Enter scheduleServiceClicked');
-    this.view.title = document.getElementById('customerName').value;
+    let title = document.getElementById('customerName').value;
     let haircut = document.getElementById('haircuts').value;
     let dealsOrSpecial = document.getElementById('dealsAndSpecials').value;
     let additionalService = document.getElementById('additionalServices').value;
-
-    this.calculateAppointmentDuration(haircut, dealsOrSpecial, additionalService);
+    let appointmentDuration = this.getHaircutDuration(haircut) + this.getServicesDuration(additionalService);
 
     $('#popupModal').modal('hide');
 
@@ -86,11 +85,15 @@ function scheduleServiceClicked(){
     $('#keyModal').modal('show');
 
     $('#calendar').fullCalendar('renderEvent', jsEvent);
-    //$('#calendar').fullCalendar('renderEvent', {
-    //  title: document.getElementById('haircuts').value,
-    //  start: currentDate,
-    //  allDay: false,
-    //});
+
+    let start = moment(date);
+    let end = moment(start).add(appointmentDuration, 'hour');
+    $('#calendar').fullCalendar('renderEvent', {
+      title: title + ": " + haircut + ' & ' + additionalService,
+      start: start,
+      end: end,
+      allDay: false,
+    });
 }
 
 function scheduleServicesCloseClicked(){
@@ -103,12 +106,8 @@ function scheduleServicesCloseClicked(){
       start: start,
       end: end,
       allDay: false,
+      editable: false,
     });
-
-}
-
-function calculateAppointmentDuration(haircut, deals, services){
-    console.log('Haircut: ' + haircut + ' Deal: ' + deals + ' Service: ' + services);
 }
 
 function getHaircutDuration(haircut){
@@ -116,22 +115,32 @@ function getHaircutDuration(haircut){
     if( haircut == 'Full Haircut and Facial Hair'){
       totalDuration = totalDuration + .25;
     }
+    //Could add more slots for varius haircut durations need info..
     return totalDuration;
 }
 
 function getServicesDuration(service){
   let totalDuration = 0;
-  if (service == "Curl Sponge"){
+  if (service == "Curl Sponge" ||
+      service == "Eyebrows"){
     totalDuration = totalDuration + .08; //5 minutes
-  } else if(false) {
+  } else if(service == "Shave" ||
+            service == "Lineup" ||
+            service == "Facial Hair")
+  {
     totalDuration = totalDuration + .17; //10 minutes
-  }else if(false){
+  }else if(service == "Fade" ||
+           service == "Taper" ||
+          service == "Hot Towel"){
     totalDuration = totalDuration + .25; //15 minutes
-  }else if(false){
+  }else if(service == "Shampoo" ||
+           service == "Hard Part"){
     totalDuration = totalDuration + .33; //20 minutes
-  }else if(false){
+  }else if(service == "Color" ||
+           service == "Designs" ||
+           service == "Facial Mask"){
     totalDuration = totalDuration + .5; //30 minutes
-  }else if(false){
+  }else if(service == "Hot Wax"){
     totalDuration = totalDuration + .1;//60 minutes
   }
 
