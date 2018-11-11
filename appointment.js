@@ -14,6 +14,11 @@
       left : 'title',
       right : 'today, month, agendaDay, prev, next',
     },
+    businessHours: {
+      dow: [ 2, 3, 4, 5, 6 ], // Monday, Tuesday, Wednesday
+      start: '07:30', // 8am
+      end: '18:00' // 6pm
+    },
 
     dayClick: function(date, jsEvent, view) {
 
