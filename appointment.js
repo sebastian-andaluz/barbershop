@@ -16,12 +16,12 @@
     },
 
     dayClick: function(date, jsEvent, view) {
-      $('#popupModal').modal('show');
-      //variable read across functions
-      currentDate = date;
-      // change the day's background color just for fun
-      //$(this).css('background-color', 'red');
 
+      if(view.type == 'agendaDay'){
+        dayClickIsAgendaDay(date, jsEvent, view);
+      } else if(view.type == 'month'){
+        dayClickIsMonth(date, jsEvent, view);
+      }
     },
 
       selectable: true,
@@ -62,4 +62,18 @@
 
 function cancelAppt() {
 $('#cancelModal').modal('show');
+}
+
+function dayClickIsAgendaDay(date, jsEvent, view){
+    console.log('Click was agendaDay');
+
+    $('#popupModal').modal('show');
+    //variable read across functions
+    currentDate = date;
+    // change the day's background color just for fun
+    //$(this).css('background-color', 'red');
+}
+
+function dayClickIsMonth(date, jsEvent, view){
+    console.log('Click was Month');
 }
