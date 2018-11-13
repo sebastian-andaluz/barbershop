@@ -11,7 +11,7 @@ app.use(bodyparser.urlencoded({ extended: true }));
 
 // Simple test array to store appointments
 // Will be substituted with database later but for now will suffice
-let appointments = [{"name": "Test"}];
+let appointments = [];
 
 app.route('/')
       .get((req, res) => {
