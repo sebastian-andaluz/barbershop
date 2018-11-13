@@ -75,10 +75,12 @@ function scheduleServiceClicked(){
     let appointmentDuration = this.getHaircutDuration(haircut) + this.getServicesDuration(additionalService);
 
     $('#popupModal').modal('hide');
+    
+    alert(this.getServicesDuration(additionalService));
 
     var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-    var key = Array.apply(null, Array(6)).map(function() { return s.charAt(Math.floor(Math.random() * s.length)); }).join('');
+    var key = Array.apply(null, Array(15)).map(function() { return s.charAt(Math.floor(Math.random() * s.length)); }).join('');
 
     document.getElementById("cancelKey").innerHTML = key;
 
@@ -123,7 +125,7 @@ function getServicesDuration(service){
   let totalDuration = 0;
   if (service == "Curl Sponge" ||
       service == "Eyebrows"){
-    totalDuration = totalDuration + .08; //5 minutes
+    totalDuration = totalDuration + (5/60); //5 minutes
   } else if(service == "Shave" ||
             service == "Lineup" ||
             service == "Facial Hair")
@@ -146,3 +148,17 @@ function getServicesDuration(service){
 
   return totalDuration;
 }
+
+
+/*Notes for next sprint:
+edit times for slots,
+doesn't show end time slot for just haircut, --AUSTIN
+reset popup modal,
+cancelling still adds a block, --AUSTIN
+no allowing users to drag-edit time slots, --AUSTIN
+warn users of cancelling appointments,
+fixed cancelled days (Sunday and Monday), --AUSTIN
+see about changing color for current day selected,
+(more issues to add?)
+?do deals and specials overrride haircuts?
+*/
