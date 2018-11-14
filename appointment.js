@@ -76,7 +76,7 @@ function scheduleServiceClicked(){
 
     $('#popupModal').modal('hide');
     
-    alert(this.getServicesDuration(additionalService));
+    //alert(this.getServicesDuration(additionalService));
 
     var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
@@ -96,6 +96,11 @@ function scheduleServiceClicked(){
       end: end,
       allDay: false,
     });
+    
+    document.getElementById('customerName').value = '';
+    document.getElementById('haircuts').value = '';
+    document.getElementById('dealsAndSpecials').value = '';
+    document.getElementById('additionalServices').value = '';
 }
 
 function scheduleServicesCloseClicked(){
@@ -126,24 +131,33 @@ function getServicesDuration(service){
   if (service == "Curl Sponge" ||
       service == "Eyebrows"){
     totalDuration = totalDuration + (5/60); //5 minutes
-  } else if(service == "Shave" ||
+  }
+  
+  else if(service == "Shave" ||
             service == "Lineup" ||
-            service == "Facial Hair")
-  {
-    totalDuration = totalDuration + .17; //10 minutes
-  }else if(service == "Fade" ||
+            service == "Facial Hair"){
+    totalDuration = totalDuration + (10/60); //10 minutes
+  }
+  
+  else if(service == "Fade" ||
            service == "Taper" ||
           service == "Hot Towel"){
-    totalDuration = totalDuration + .25; //15 minutes
-  }else if(service == "Shampoo" ||
+    totalDuration = totalDuration + (15/60); //15 minutes
+  }
+  
+  else if(service == "Shampoo" ||
            service == "Hard Part"){
-    totalDuration = totalDuration + .33; //20 minutes
-  }else if(service == "Color" ||
+    totalDuration = totalDuration + (20/60); //20 minutes
+  }
+  
+  else if(service == "Color" ||
            service == "Designs" ||
            service == "Facial Mask"){
-    totalDuration = totalDuration + .5; //30 minutes
-  }else if(service == "Hot Wax"){
-    totalDuration = totalDuration + .1;//60 minutes
+    totalDuration = totalDuration + (30/60); //30 minutes
+  }
+  
+  else if(service == "Hot Wax"){
+    totalDuration = totalDuration + (60/60);//60 minutes
   }
 
   return totalDuration;
@@ -151,14 +165,14 @@ function getServicesDuration(service){
 
 
 /*Notes for next sprint:
-edit times for slots,
-doesn't show end time slot for just haircut, --AUSTIN
-reset popup modal,
+edit times for slots, X
+doesn't show end time slot for just haircut and also shows empty additional service, --AUSTIN
+reset popup modal,X
 cancelling still adds a block, --AUSTIN
 no allowing users to drag-edit time slots, --AUSTIN
-warn users of cancelling appointments,
+warn users of cancelling appointments, X
 fixed cancelled days (Sunday and Monday), --AUSTIN
-see about changing color for current day selected,
+see about changing color for current day selected, X
 (more issues to add?)
 ?do deals and specials overrride haircuts?
 */
