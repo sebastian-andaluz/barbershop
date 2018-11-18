@@ -85,7 +85,7 @@ function scheduleServiceClicked(){
       "key":key
     }
 
-    $.post("/appointments", appointment);
+    $.post("/api/appointments", appointment);
 
     $('#popupModal').modal('hide');
     
