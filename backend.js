@@ -9,6 +9,9 @@ let app = express();
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 
+//Serve static content
+app.use(express.static("."));
+
 // Simple test array to store appointments
 // Will be substituted with database later but for now will suffice
 let appointments = [];

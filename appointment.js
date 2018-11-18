@@ -67,12 +67,25 @@ function dayClickIsMonth(date, jsEvent, view){
 }
 
 function scheduleServiceClicked(){
+    var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     console.log('Enter scheduleServiceClicked');
     let title = document.getElementById('customerName').value;
     let haircut = document.getElementById('haircuts').value;
     let dealsOrSpecial = document.getElementById('dealsAndSpecials').value;
     let additionalService = document.getElementById('additionalServices').value;
     let appointmentDuration = this.getHaircutDuration(haircut) + this.getServicesDuration(additionalService);
+    var key = Array.apply(null, Array(15)).map(function() { return s.charAt(Math.floor(Math.random() * s.length)); }).join('');
+
+    var appointment = {
+      "title":title,
+      "haircut":haircut,
+      "dealsOrSpecial":dealsOrSpecial,
+      "additionalService":additionalService,
+      "appointmentDuration":appointmentDuration,
+      "key":key
+    }
+
+    $.post("/appointments", appointment);
 
     $('#popupModal').modal('hide');
     
