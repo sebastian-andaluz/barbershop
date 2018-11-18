@@ -21,7 +21,7 @@ app.route('/')
         res.sendFile(path.join(__dirname + '/index.html'));
       })
 
-app.route('/appointments')
+app.route('/api/appointments')
       // GET REQUEST
       .get((req, res) => {
         res.json(appointments);
