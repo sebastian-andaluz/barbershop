@@ -25,8 +25,8 @@ app.route('/appointments')
       })
       // POST REQUEST
       .post((req, res) => {
-        appointments.push(req.body.appointment);
-        res.send("Added " + req.body.appointment);
+        appointments.push(req.body);
+        res.send("Added " + req.body);
       })
 
 app.listen(port, () => {
