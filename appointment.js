@@ -37,6 +37,9 @@
   //   console.log('clicked on ' + date.format());
   // });
 
+  var view = $('#calendar').fullCalendar('getView');
+  alert("The view's title is " + view.title);
+
 });
 
 function cancelAppt() {
@@ -197,4 +200,4 @@ see about changing color for current day selected, X
 
 
 
-//change fonts for key? o and 0 look similar
+//block out day when full
