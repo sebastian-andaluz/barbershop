@@ -76,13 +76,25 @@ function scheduleServiceClicked(){
     let appointmentDuration = this.getHaircutDuration(haircut) + this.getServicesDuration(additionalService);
     var key = Array.apply(null, Array(15)).map(function() { return s.charAt(Math.floor(Math.random() * s.length)); }).join('');
 
+    $('#calendar').fullCalendar('renderEvent', jsEvent);
+
+    let start = moment(date);
+    let end = moment(start).add(appointmentDuration, 'hour');
+
+    let startString = JSON.stringify(start);
+    let endString = JSON.stringify(end);
+
+    //var startDate = new Date(startString) to convert back to form
+
     var appointment = {
       "title":title,
       "haircut":haircut,
       "dealsOrSpecial":dealsOrSpecial,
       "additionalService":additionalService,
       "appointmentDuration":appointmentDuration,
-      "key":key
+      "key":key,
+      "start":startString,
+      "end":endString
     }
 
     $.post("/api/appointments", appointment);
@@ -91,18 +103,11 @@ function scheduleServiceClicked(){
     
     //alert(this.getServicesDuration(additionalService));
 
-    var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-
-    var key = Array.apply(null, Array(15)).map(function() { return s.charAt(Math.floor(Math.random() * s.length)); }).join('');
-
     document.getElementById("cancelKey").innerHTML = key;
 
     $('#keyModal').modal('show');
 
-    $('#calendar').fullCalendar('renderEvent', jsEvent);
-
-    let start = moment(date);
-    let end = moment(start).add(appointmentDuration, 'hour');
+    
     $('#calendar').fullCalendar('renderEvent', {
       title: title + ": " + haircut + ' & ' + additionalService,
       start: start,
@@ -189,3 +194,7 @@ see about changing color for current day selected, X
 (more issues to add?)
 ?do deals and specials overrride haircuts?
 */
+
+
+
+//change fonts for key? o and 0 look similar
