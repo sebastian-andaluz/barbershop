@@ -16,7 +16,7 @@
       right : 'today, month, agendaDay, prev, next',
     },
     businessHours: {
-      dow: [ 1, 2, 3, 4, 5], // Monday, Tuesday, Wednesday
+      dow: [ 2, 3, 4, 5, 6], // Monday, Tuesday, Wednesday
       start: '07:30', // 8am
       end: '18:00' // 6pm
     },
@@ -182,9 +182,9 @@ edit times for slots, X
 doesn't show end time slot for just haircut and also shows empty additional service, --AUSTIN
 reset popup modal,X
 cancelling still adds a block, --DONE
-no allowing users to drag-edit time slots, --AUSTIN
+no allowing users to drag-edit time slots, --DONE
 warn users of cancelling appointments, X
-fixed cancelled days (Sunday and Monday), --AUSTIN
+fixed cancelled days (Sunday and Monday), --DONE
 see about changing color for current day selected, X
 (more issues to add?)
 ?do deals and specials overrride haircuts?
