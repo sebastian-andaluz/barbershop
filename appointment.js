@@ -115,8 +115,9 @@ function scheduleServiceClicked(){
       title: title + ": " + haircut + ' & ' + additionalService,
       start: start,
       end: end,
-      allDay: false,
       editable : false,
+      allDay : false,
+      displayEventEnd : true,
     });
 
     document.getElementById('customerName').value = '';
@@ -179,7 +180,9 @@ function getServicesDuration(service){
 
 /*Notes for next sprint:
 edit times for slots, X
-doesn't show end time slot for just haircut and also shows empty additional service, --AUSTIN
+- Doesn't show end time slot for just haircut and also shows empty additional service, --AUSTIN
+    - UPDATE: See https://github.com/fullcalendar/fullcalendar/issues/3049
+    - According to this thread, this only occurs for 1/2 hour timeslots and is "working as designed" behavior, we can discuss an internal fix but I see no reason to bother
 reset popup modal,X
 cancelling still adds a block, --DONE
 no allowing users to drag-edit time slots, --DONE
