@@ -116,6 +116,7 @@ function scheduleServiceClicked(){
       start: start,
       end: end,
       allDay: false,
+      editable : false,
     });
 
     document.getElementById('customerName').value = '';
