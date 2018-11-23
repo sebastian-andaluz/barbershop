@@ -103,21 +103,21 @@ function scheduleServiceClicked(){
     $.post("/api/appointments", appointment);
 
     $('#popupModal').modal('hide');
-    
+
     //alert(this.getServicesDuration(additionalService));
 
     document.getElementById("cancelKey").innerHTML = key;
 
     $('#keyModal').modal('show');
 
-    
+
     $('#calendar').fullCalendar('renderEvent', {
       title: title + ": " + haircut + ' & ' + additionalService,
       start: start,
       end: end,
       allDay: false,
     });
-    
+
     document.getElementById('customerName').value = '';
     document.getElementById('haircuts').value = '';
     document.getElementById('dealsAndSpecials').value = '';
@@ -127,15 +127,6 @@ function scheduleServiceClicked(){
 function scheduleServicesCloseClicked(){
   //THIS IS JUST HERE TO EXPERIMENT WITH RENDERING EVENTS :)
     console.log('Enter scheduleServicesCloseClicked');
-    let start = moment(date);
-    let end = moment(start).add(.08, 'hour');
-    $('#calendar').fullCalendar('renderEvent', {
-      title: 'test title',
-      start: start,
-      end: end,
-      allDay: false,
-      editable: false,
-    });
 }
 
 function getHaircutDuration(haircut){
@@ -153,30 +144,30 @@ function getServicesDuration(service){
       service == "Eyebrows"){
     totalDuration = totalDuration + (5/60); //5 minutes
   }
-  
+
   else if(service == "Shave" ||
             service == "Lineup" ||
             service == "Facial Hair"){
     totalDuration = totalDuration + (10/60); //10 minutes
   }
-  
+
   else if(service == "Fade" ||
            service == "Taper" ||
           service == "Hot Towel"){
     totalDuration = totalDuration + (15/60); //15 minutes
   }
-  
+
   else if(service == "Shampoo" ||
            service == "Hard Part"){
     totalDuration = totalDuration + (20/60); //20 minutes
   }
-  
+
   else if(service == "Color" ||
            service == "Designs" ||
            service == "Facial Mask"){
     totalDuration = totalDuration + (30/60); //30 minutes
   }
-  
+
   else if(service == "Hot Wax"){
     totalDuration = totalDuration + (60/60);//60 minutes
   }
@@ -189,7 +180,7 @@ function getServicesDuration(service){
 edit times for slots, X
 doesn't show end time slot for just haircut and also shows empty additional service, --AUSTIN
 reset popup modal,X
-cancelling still adds a block, --AUSTIN
+cancelling still adds a block, --DONE
 no allowing users to drag-edit time slots, --AUSTIN
 warn users of cancelling appointments, X
 fixed cancelled days (Sunday and Monday), --AUSTIN
