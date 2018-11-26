@@ -23,12 +23,14 @@
 
     <!-- Custom styles for this template -->
     <link href="css/creative.min.css" rel="stylesheet">
-    
+
     <!-- Calendar plugin FullCalendar.io -->
     <link rel='stylesheet' href='node_modules/fullcalendar/dist/fullcalendar.css' />
     <script src='node_modules/jquery/dist/jquery.min.js'></script>
     <script src='node_modules/moment/min/moment.min.js'></script>
     <script src='node_modules/fullcalendar/dist/fullcalendar.js'></script>
+
+    <script src='appointment.js'></script>
 
   </head>
 
@@ -67,39 +69,115 @@
             <h2 class="section-heading text-white">Schedule your haircut today!</h2>
             <hr class="light my-4">
             <div id='calendar' class="text-white" style="cursor: pointer;">
-              <script>
-                $(document).ready(function() {
-                
-                  // page is now ready, initialize the calendar...
+              <script id='script'>
 
-                  $('#calendar').fullCalendar({
-                    // put your options and callbacks here
-                    editable: true,
-                    eventLimit: true,
-                    weekMode: 'liquid',
-                    url: '#',
-                    themeSystem: 'bootstrap4',
-                    cursor: 'pointer',
-                  });
-                  
-                  var calendar = $('#calendar').fullCalendar('getCalendar');
-                  calendar.on('dayClick', function(date, jsEvent, view) {
-                    console.log('clicked on ' + date.format());
-                  });
-              });
               </script>
             </div>
-            <!-- <iframe src="https://calendar.google.com/calendar/embed?title=Trimmer%20Trev&#39;s%20Barbershop&amp;height=600&amp;wkst=1&amp;bgcolor=%23ff0000&amp;src=8gbrujn1pns6tiiuho0j9u3rk0%40group.calendar.google.com&amp;color=%23B1365F&amp;ctz=America%2FNew_York" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe> -->            
+            <!-- <iframe src="https://calendar.google.com/calendar/embed?title=Trimmer%20Trev&#39;s%20Barbershop&amp;height=600&amp;wkst=1&amp;bgcolor=%23ff0000&amp;src=8gbrujn1pns6tiiuho0j9u3rk0%40group.calendar.google.com&amp;color=%23B1365F&amp;ctz=America%2FNew_York" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe> -->
             <p class="text-faded mb-4">The best barber in Fort Wayne.</p>
+            <p class="text-faded mb-4" style="font-size: 20px">Please be aware that if you wish to cancel, do so at least one day in advance!</p>
             <a class="btn btn-light btn-xl js-scroll-trigger" href="#services">Schedule</a>
+            <a class="btn btn-light btn-xl js-scroll-trigger" id="cancelBtn" name="cancelBtn" onClick="cancelAppt()">Cancel</a>
           </div>
         </div>
       </div>
     </section>
 
-    
+    <!-- Modal -->
+    <div class="modal fade" id="popupModal" tabindex="-1" role="dialog" aria-labelledby="popupModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="popupModalLabel">Schedule your Service</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <label for="">Name:</label>
+            <input type="text" id="customerName"/> <br/>
+            <label for="">Haircuts</label>
+            <select name="haircuts" id="haircuts">
+                <option value="None">None</option>
+                <option value="Kids Cuts">Kids Cuts ($20 and up)</option>
+                <option value="Senior Cuts">Senior Cuts ($20)</option>
+                <option value="Full Haircut">Full Haircut ($30)</option>
+                <option value="Full Haircut and Facial Hair">Full Haircut and Facial Hair ($40)</option>
+            </select>
+            <label for="">Deals and Specials</label>
+            <select name="dealsAndSpecials" id="dealsAndSpecials">
+              <option value="None">None</option>
+              <option value="Early Bird">Early Bird/After Hours ($50)</option>
+              <option value="House Calls/Off-Days">House Calls/Off-days ($100)</option>
+            </select>
+            <label for="">Additional Services</label>
+            <select name="additionalServices" id="additionalServices">
+              <option value="None">None</option>
+              <option value="Curl Sponge">Curl Sponge ($5)</option>
+              <option value="Styled">Styled ($5)</option>
+              <option value="Hard Part">Hard Part ($5)</option>
+              <option value="Facial Mask">Facial Mask ($5)</option>
+              <option value="Lineup">Line Up ($10)</option>
+              <otpion value-"Eyebrows">Eyebrows ($10)</otpion>
+              <option value="Facial Hair">Facial Hair ($10)</option>
+              <option value="Shampoo">Shampoo ($10)</option>
+              <option value="Designs">Designs ($10)</option>
+              <option value="Hot Wax">Hot Wax ($10)</option>
+              <option value="Color">Color ($20)</option>
+              <option value="Hot Towel">Hot Towel ($20)</option>
+              <option value="Shave">Shave ($20)</option>
+              <otpion value="Taper">Taper ($20)</otpion>
+              <option value="Fade">Fade (side only) ($25)</option>
+            </select>
+            <br/>
+            <!--<label for="">Time:</label>-->
+            <!--<input type="text" id="timeSlot"/>-->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" onclick="scheduleServicesCloseClicked()" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" onclick="scheduleServiceClicked()">Schedule Service</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    
+    <div class="modal fade" id="keyModal" tabIndex="-1" role="dialog" aria-labelledby="keyModal" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="keyModal"> Here is your cancellation key if you wish to cancel up to a day before your appointment. Please Save it!</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p id="cancelKey" style="font-family: Arial, Helvetica, sans-serif;">A Paragraph.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="cancelModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="cancelModalLabel">Are you sure you want to cancel?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <label for="">Enter Cancellation Key:</label>
+            <input type="text" id="customerName"/> <br/>
+            <button type="button" class="btn btn-primary" onclick="confirmCancel()" style="display: block; margin: 0 auto; ">
+              Confirm Cancellation
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     <!-- Bootstrap core JavaScript -->
     <!-- Commented out vendor path because Calendar uses one as well stored in a different location
          and the file paths conflict with each other -->
