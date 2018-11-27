@@ -1,6 +1,7 @@
 let express = require('express');
 let path = require('path');
 let bodyparser = require('body-parser');
+var mongoOp = require('./model/mongo');
 
 let port = 8080;
 let app = express();
@@ -24,12 +25,39 @@ app.route('/')
 app.route('/api/appointments')
       // GET REQUEST
       .get((req, res) => {
-        res.json(appointments);
+        //res.json(appointments);
+        mongoOp.find({}, (err, data) => {
+          if(!err) {
+            res.json(data);
+          }
+          else {
+            res.send("ERROR:" + err);
+          }
+        });
       })
       // POST REQUEST
       .post((req, res) => {
-        appointments.push(req.body);
-        res.send("Added " + req.body);
+        console.log(req.body);
+        var db = new mongoOp();
+        db.name = req.body.title;
+        db.haircut = req.body.haircut;
+        db.deals = req.body.dealsOrService;
+        db.addOns = req.body.additionalService;
+        db.start = req.body.start;
+        db.duration = req.body.appointmentDuration;
+        db.end = req.body.end;
+        db.key = req.body.key;
+        db.save((err, appointment) => {
+          if(err) {
+            console.log("DB FAILED TO POST NEW APPOINTMENT");
+            console.log(err);
+            //next(err);
+          }
+          else {
+            console.log("SUCCESSFULLY POSTED APPOINTMENT");
+            //res.send("Appointment Stored Successfully");
+          }
+        });
       })
 
 app.listen(port, () => {
