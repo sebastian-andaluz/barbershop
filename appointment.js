@@ -33,17 +33,17 @@
     },
 
   });
-  // calendar.on('dayClick', function(date, jsEvent, view) {
-  //   console.log('clicked on ' + date.format());
-  // });
-
-  var view = $('#calendar').fullCalendar('getView');
-  alert("The view's title is " + view.title);
 
 });
 
+var cancelKey; //key is not getting passed along
 function cancelAppt() {
-$('#cancelModal').modal('show');
+  $('#cancelModal').modal('show');
+  cancelKey = document.getElementById('cancellationKey').value;
+}
+
+function confirmCancel() {
+  alert('heres your key ' + cancelKey);
 }
 
 function dayClickIsAgendaDay(date, jsEvent, view){
@@ -79,7 +79,17 @@ function scheduleServiceClicked(){
     let appointmentDuration = this.getHaircutDuration(haircut) + this.getServicesDuration(additionalService);
     var key = Array.apply(null, Array(15)).map(function() { return s.charAt(Math.floor(Math.random() * s.length)); }).join('');
 
+    // totalHours += appointmentDuration;
+
+    // if (totalHours >= workHours)
+    // {
+    //     alert("full day");
+    // }
+
     $('#calendar').fullCalendar('renderEvent', jsEvent);
+
+    var bh = $('#calendar').fullCalendar('option', 'businessHours');
+    //alert(bh.value);
 
     let start = moment(date);
     let end = moment(start).add(appointmentDuration, 'hour');
@@ -103,23 +113,22 @@ function scheduleServiceClicked(){
     $.post("/api/appointments", appointment);
 
     $('#popupModal').modal('hide');
-
+    
     //alert(this.getServicesDuration(additionalService));
 
     document.getElementById("cancelKey").innerHTML = key;
 
     $('#keyModal').modal('show');
 
-
+    
     $('#calendar').fullCalendar('renderEvent', {
       title: title + ": " + haircut + ' & ' + additionalService,
       start: start,
       end: end,
-      editable : false,
-      allDay : false,
-      displayEventEnd : true,
+      allDay: false,
+      
     });
-
+    
     document.getElementById('customerName').value = '';
     document.getElementById('haircuts').value = '';
     document.getElementById('dealsAndSpecials').value = '';
@@ -129,6 +138,15 @@ function scheduleServiceClicked(){
 function scheduleServicesCloseClicked(){
   //THIS IS JUST HERE TO EXPERIMENT WITH RENDERING EVENTS :)
     console.log('Enter scheduleServicesCloseClicked');
+    let start = moment(date);
+    let end = moment(start).add(.08, 'hour');
+    $('#calendar').fullCalendar('renderEvent', {
+      title: 'test title',
+      start: start,
+      end: end,
+      allDay: false,
+      editable: false,
+    });
 }
 
 function getHaircutDuration(haircut){
@@ -146,30 +164,30 @@ function getServicesDuration(service){
       service == "Eyebrows"){
     totalDuration = totalDuration + (5/60); //5 minutes
   }
-
+  
   else if(service == "Shave" ||
             service == "Lineup" ||
             service == "Facial Hair"){
     totalDuration = totalDuration + (10/60); //10 minutes
   }
-
+  
   else if(service == "Fade" ||
            service == "Taper" ||
           service == "Hot Towel"){
     totalDuration = totalDuration + (15/60); //15 minutes
   }
-
+  
   else if(service == "Shampoo" ||
            service == "Hard Part"){
     totalDuration = totalDuration + (20/60); //20 minutes
   }
-
+  
   else if(service == "Color" ||
            service == "Designs" ||
            service == "Facial Mask"){
     totalDuration = totalDuration + (30/60); //30 minutes
   }
-
+  
   else if(service == "Hot Wax"){
     totalDuration = totalDuration + (60/60);//60 minutes
   }
@@ -179,16 +197,6 @@ function getServicesDuration(service){
 
 
 /*Notes for next sprint:
-edit times for slots, X
-- Doesn't show end time slot for just haircut and also shows empty additional service, --AUSTIN
-    - UPDATE: See https://github.com/fullcalendar/fullcalendar/issues/3049
-    - According to this thread, this only occurs for 1/2 hour timeslots and is "working as designed" behavior, we can discuss an internal fix but I see no reason to bother
-reset popup modal,X
-cancelling still adds a block, --DONE
-no allowing users to drag-edit time slots, --DONE
-warn users of cancelling appointments, X
-fixed cancelled days (Sunday and Monday), --DONE
-see about changing color for current day selected, X
 (more issues to add?)
 ?do deals and specials overrride haircuts?
 */
@@ -196,3 +204,4 @@ see about changing color for current day selected, X
 
 
 //block out day when full
+//talk to team about .gitignore file
