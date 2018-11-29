@@ -36,14 +36,18 @@
 
 });
 
-var cancelKey; //key is not getting passed along
 function cancelAppt() {
   $('#cancelModal').modal('show');
-  cancelKey = document.getElementById('cancellationKey').value;
+}
+
+function getKey() {
+  return document.getElementById('cancellationKey').value;
 }
 
 function confirmCancel() {
-  alert('heres your key ' + cancelKey);
+  alert('heres your key ' + getKey());
+  //Key grabbed, cancelling taken care of in the backend
+  //key passed along through here.
 }
 
 function dayClickIsAgendaDay(date, jsEvent, view){
@@ -79,17 +83,9 @@ function scheduleServiceClicked(){
     let appointmentDuration = this.getHaircutDuration(haircut) + this.getServicesDuration(additionalService);
     var key = Array.apply(null, Array(15)).map(function() { return s.charAt(Math.floor(Math.random() * s.length)); }).join('');
 
-    // totalHours += appointmentDuration;
-
-    // if (totalHours >= workHours)
-    // {
-    //     alert("full day");
-    // }
+    //TODO: totalHours
 
     $('#calendar').fullCalendar('renderEvent', jsEvent);
-
-    var bh = $('#calendar').fullCalendar('option', 'businessHours');
-    //alert(bh.value);
 
     let start = moment(date);
     let end = moment(start).add(appointmentDuration, 'hour');
@@ -204,4 +200,3 @@ function getServicesDuration(service){
 
 
 //block out day when full
-//talk to team about .gitignore file
