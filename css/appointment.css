@@ -1,0 +1,30 @@
+.fc table {
+  width: 100%;
+  box-sizing: border-box;
+  /* fix scrollbar issue in firefox */
+  table-layout: fixed;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 1em;
+  color: white; /*MANUALLY added*/
+  /* normalize cross-browser */ }
+
+.fc td.fc-today {
+  border-style: double;
+  background: #237243 !important; /*manually added*/
+  color: white; 
+  /* overcome neighboring borders */ }
+
+/* title text */
+.fc-toolbar h2 {
+  margin: 0;
+  color: white; /*manually added*/}
+
+/* button layering (for border precedence) */
+.fc-toolbar button {
+  position: relative;
+  background: #237243; } /*manually added*/
+
+.fc-toolbar button:focus {
+  z-index: 5;
+  background: #237243 !important; } /* manually added */
