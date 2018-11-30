@@ -45,7 +45,16 @@ function getKey() {
 }
 
 function confirmCancel() {
-  alert('heres your key ' + getKey());
+  //alert('heres your key ' + getKey());
+  //$.delete("/api/appointments", {"key": getKey()});
+
+  $.ajax({
+    type: 'DELETE',
+    url: '/api/appointments',
+    data: {"key": getKey()},
+    datatype: 'application/json'
+  })
+
   //Key grabbed, cancelling taken care of in the backend
   //key passed along through here.
 }
@@ -105,6 +114,10 @@ function scheduleServiceClicked(){
       "start":start.toDate(),
       "end":end.toDate()
     }
+
+    //set appointment
+
+    //get appointment
 
     $.post("/api/appointments", appointment);
 
