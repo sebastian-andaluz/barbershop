@@ -1,40 +1,22 @@
- $(document).ready(function() {
-  // page is now ready, initialize the calendar...
-  var currentDate;
-  var date, jsEvent, view;
+function getAppoinments(){
+  $.get('/api/appointments').then((res) => {
+    // Assuming you have some method to process array of events
 
-  $('#calendar').fullCalendar({
-    // put your options and callbacks here
-    editable: true,
-    eventLimit: true,
-    weekMode: 'liquid',
-    url: '#',
-    themeSystem: 'bootstrap4',
-    cursor: 'pointer',
-    header: {
-      left : 'title',
-      right : 'today, month, agendaDay, prev, next',
-    },
-    businessHours: {
-      dow: [ 2, 3, 4, 5, 6], // Monday, Tuesday, Wednesday
-      start: '07:30', // 8am
-      end: '18:00' // 6pm
-    },
+    res.forEach((e) => {
+      e.title = e.name + ' ' + e.haircut;
+    })
+    renderExistingEvents(res);
+  })
+}
 
-    dayClick: function(date, jsEvent, view) {
-      console.log('Enter dayClick');
-      if(view.type == 'agendaDay'){
-        dayClickIsAgendaDay(date, jsEvent, view);
-      } else if(view.type == 'month'){
-        dayClickIsMonth(date, jsEvent, view);
-      } else{
-        console.log('Click from: ' +  view.type);
-      }
-    },
+$(document).on('click', '.fc-button-prev', function () {
+  console.log('prev clicked');
+  getAppoinments();
+})
 
-  });
-
-});
+function renderExistingEvents(myEvents){
+  $('#calendar').fullCalendar('renderEvents', myEvents);
+}
 
 function cancelAppt() {
   $('#cancelModal').modal('show');
@@ -204,6 +186,71 @@ function getServicesDuration(service){
   return totalDuration;
 }
 
+
+
+
+$(document).ready(function() {
+  // page is now ready, initialize the calendar...
+  var currentDate;
+  var date, jsEvent, view;
+  var dbEvents;
+
+  $('#calendar').fullCalendar({
+    // put your options and callbacks here
+    editable: true,
+    eventLimit: true,
+    weekMode: 'liquid',
+    url: '#',
+    themeSystem: 'bootstrap4',
+    cursor: 'pointer',
+    header: {
+      left : 'title',
+      right : 'today, month, agendaDay, prev, next',
+    },
+    businessHours: {
+      dow: [ 2, 3, 4, 5, 6], // Monday, Tuesday, Wednesday
+      start: '07:30', // 8am
+      end: '18:00' // 6pm
+    },
+
+    dayClick: function(date, jsEvent, view) {
+      console.log('Enter dayClick');
+      if(view.type == 'agendaDay'){
+        dayClickIsAgendaDay(date, jsEvent, view);
+      } else if(view.type == 'month'){
+        dayClickIsMonth(date, jsEvent, view);
+      } else{
+        console.log('Click from: ' +  view.type);
+      }
+    },
+  });
+  getAppoinments();
+
+  $('.fc-prev-button span').click(() => {
+    $('#calendar').fullCalendar('removeEvents');
+    getAppoinments();
+  })
+
+  $('.fc-next-button span').click(() => {
+    $('#calendar').fullCalendar('removeEvents');
+    getAppoinments();
+  })
+
+  $('.fc-agendaDay-button').click(() => {
+    $('#calendar').fullCalendar('removeEvents');
+    getAppoinments();
+  })
+
+  $('.fc-month-button').click(() => {
+    $('#calendar').fullCalendar('removeEvents');
+    getAppoinments();
+  })
+
+  $('.fc-today-button').click(() => {
+    $('#calendar').fullCalendar('removeEvents');
+    getAppoinments();
+  })
+});
 
 /*Notes for next sprint:
 (more issues to add?)
