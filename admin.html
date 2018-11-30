@@ -5,6 +5,10 @@
 
   <title>Admin Page</title>
 
+  <!-- JavaScript libraries-->
+  <script src='node_modules/jquery/dist/jquery.min.js'></script>
+  <script src='node_modules/moment/min/moment.min.js'></script>
+
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
@@ -55,21 +59,92 @@
   </section>
   <section class="bg-secondary">
 
-
-    <div class="container col-4">
-      <div class="card">
-        <h5 class="card-header">Appointment: date </h5>
-        <div class="card-body">
-          <p class="card-text">Client:</p>
-          <p class="card-text">Time:</p>
-          <p class="card-text">Service:</p>
-          <p class="card-text">Duration:</p>
-          <p class="card-text">Price Quote:</p>
-          <a href="#" class="btn btn-primary">Delete Appointment</a>
-          <!--add confirmation modal-->
-        </div>
-      </div>
+    <div id="prime" class="container col-4">
     </div>
 
+
+
+
+
   </section>
+
+  <Script>
+    $.get("api/appointments").then(res => displayAppointments(res));
+
+    function displayAppointment(appointmentsArray) {
+
+      for (appointment in appointmentsArray) {
+
+        var date = "comming soon";
+        var name = appointment["title"];
+        var startTime = appointment["start"];
+        var endTime = appointment["end"];
+        var haircut = appointment["haircut"];
+        var additionalService = appointment["additionalService"];
+        var appointmentDuration = appointment["appointmentDuration"];
+        var dealsOrSpecial = appointment["dealsOrSpecial"];
+        var key = appointment["key"];
+
+        // Create div element, class card.
+        var divCard = document.createElement("div");
+        divCard.setAttribute("class", "card");
+
+        // Create h5 element of class card-header.
+        var h5 = document.createElement("h5");
+        h5.setAttribute("class", "card-header");
+        var txtH5 = document.createTextNode("Appointment: " + date);
+        h5.appendChild(txtH5);
+
+        // Create div element of class card-body.
+        var divBody = document.createElement("div");
+        divBody.setAttribute("class", "card-body");
+
+        // Create p elements of class card-text.
+        // name
+        var pName = document.createElement("P");
+        pName.setAttribute("class", "card-text");
+        var txtName = document.createTextNode("Name: " + name);
+        pName.appendChild(txtName);
+
+        // Appointment time
+        var pTime = document.createElement("P");
+        pTime.setAttribute("class", "card-text");
+        var txtTime = document.createTextNode("Appointment: " + startTime + " - " + endTime);
+        pTime.appendChild(txtTime);
+
+        //haircut and additional services
+        var pService = document.createElement("P");
+        pService.setAttribute("class", "card-text");
+        var txtService = document.createTextNode("Service: " + haircut + " and " + additionalService);
+        pService.appendChild(txtService);
+
+        // dealsOrSpecials
+        var pDealsOrSpecials = document.createElement("P");
+        pDealsOrSpecials.setAttribute("class", "card-text");
+        var txtDealsOrSpecials = document.createTextNode("Deal / Special: " + dealsOrSpecial);
+        pDealsOrSpecials.appendChild(txtDealsOrSpecials);
+
+        // hidden field for key 
+
+        // create delete button
+        var btnDelete = document.createElement("BUTTON");
+        var txtLabel = document.createTextNode("Delete Appointment");
+        btnDelete.setAttribute("class", "btn btn-primary")
+        btnDelete.setAttribute("type", "button")
+        btnDelete.setAttribute("onclick", "delete()")
+        btnDelete.appendChild(txtLabel);
+
+        // Compose card
+        divBody.appendChild(pName);
+        divBody.appendChild(pTime);
+        divBody.appendChild(pService);
+        divBody.appendChild(pDealsOrSpecials);
+        divBody.appendChild(btnDelete);
+        divCard.appendChild(divBody);
+
+        // Add card to DOM
+        document.getElementById("prime").appendChild(divCard);
+      }
+    }
+  </Script>
 </body>
