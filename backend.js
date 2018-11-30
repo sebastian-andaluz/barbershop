@@ -51,11 +51,24 @@ app.route('/api/appointments')
           if(err) {
             console.log("DB FAILED TO POST NEW APPOINTMENT");
             console.log(err);
+            res.send(err);
             //next(err);
           }
           else {
             console.log("SUCCESSFULLY POSTED APPOINTMENT");
+            res.send("SUCCESSFULLY POSTED APPOINTMENT");
             //res.send("Appointment Stored Successfully");
+          }
+        });
+      })
+      // DELETE REQUEST
+      .delete((req, res) => {
+        mongoOp.deleteOne({key: req.body.key}, (err)=> {
+          if(err) {
+            console.log("Error deleting key: " + req.body.key);
+          }
+          else {
+            res.send("SUCCESSFULLY DELETED APPOINTMENT");
           }
         });
       })

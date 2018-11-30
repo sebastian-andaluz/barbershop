@@ -102,8 +102,8 @@ function scheduleServiceClicked(){
       "additionalService":additionalService,
       "appointmentDuration":appointmentDuration,
       "key":key,
-      "start":startString,
-      "end":endString
+      "start":start.toDate(),
+      "end":end.toDate()
     }
 
     $.post("/api/appointments", appointment);
