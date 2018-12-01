@@ -14,10 +14,8 @@
 
   <!-- Custom fonts for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
-    rel="stylesheet" type="text/css" />
-  <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic"
-    rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic" rel="stylesheet" type="text/css" />
 
   <!-- Plugin CSS -->
   <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet" />
@@ -32,7 +30,7 @@
     <div class="container">
       <a class="navbar-brand js-scroll-trigger" href="index.html">All Kinds Hair Co.</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                                                                                               aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -66,101 +64,109 @@
   <script>
     $.get("/api/appointments").then(res => displayAppointments(res));
 
-    function deleteAppointment(k) {
-      $.ajax({
-        type: 'DELETE',
-        url: '/api/appointments',
-        data: { "key": k },
-        datatype: 'application/json'
-      })
+function deleteAppointment(k) {
+  $.ajax({
+    type: 'DELETE',
+    url: '/api/appointments',
+    data: { "key": k },
+    datatype: 'application/json'
+  })
+}
+
+function displayAppointments(appointmentsArray) {
+  appointmentsArray.forEach((appointment) => {
+    let appmt = {
+      date: moment(appointment["start"]).format('LL'),
+      name: appointment["name"],
+      startTime: moment(appointment["start"]).format('LL'),
+      endTime: moment(appointment["end"]).format('LT'),
+      haircut: appointment["haircut"],
+      additionalService: appointment["addOns"],
+      appointmentDuration: appointment["duration"],
+      dealsOrSpecial: appointment["deals"],
+      key: appointment["key"]
     }
 
-    function displayAppointments(appointmentsArray) {
-      appointmentsArray.forEach((appointment) => {
-        var date = moment(appointment["start"]).format('LL');
-        var name = appointment["name"];
-        var startTime = moment(appointment["start"]).format('LT');
-        var endTime = moment(appointment["end"]).format('LT');
-        var haircut = appointment["haircut"];
-        var additionalService = appointment["addOns"];
-        var appointmentDuration = appointment["duration"];
-        var dealsOrSpecial = appointment["deals"];
-        var key = appointment["key"];
+    let divCard = generateCard(appmt);
 
-        // Create div element, class card.
-        var divCard = document.createElement("div");
-        divCard.setAttribute("class", "card");
+    // linebreak
+    var br = document.createElement("BR");
 
-        // Create h5 element of class card-header.
-        var h5 = document.createElement("h5");
-        h5.setAttribute("class", "card-header");
-        var txtH5 = document.createTextNode(date);
-        h5.appendChild(txtH5);
+    // Add card and spacing to DOM
+    var appointmentContainer = document.getElementById("prime");
+    appointmentContainer.appendChild(divCard);
+    appointmentContainer.appendChild(br);
+  })
+}
 
-        // Create div element of class card-body.
-        var divBody = document.createElement("div");
-        divBody.setAttribute("class", "card-body");
+function generateCard(appmt) {
+  // Create div element, class card.
+  var divCard = document.createElement("div");
+  divCard.setAttribute("class", "card");
 
-        // Create p elements of class card-text.
-        // name
-        var pName = document.createElement("P");
-        pName.setAttribute("class", "card-text");
-        var txtName = document.createTextNode("Name: " + name);
-        pName.appendChild(txtName);
+  // Create h5 element of class card-header.
+  var h5 = document.createElement("h5");
+  h5.setAttribute("class", "card-header");
+  var txtH5 = document.createTextNode(appmt.date);
+  h5.appendChild(txtH5);
 
-        // appointment time
-        var pTime = document.createElement("P");
-        pTime.setAttribute("class", "card-text");
-        var txtTime = document.createTextNode("Appointment: " + startTime + " - " + endTime);
-        pTime.appendChild(txtTime);
+  // Create div element of class card-body.
+  var divBody = document.createElement("div");
+  divBody.setAttribute("class", "card-body");
 
-        // haircut and additional services
-        var pService = document.createElement("P");
-        pService.setAttribute("class", "card-text");
-        var txtService = document.createTextNode("Service: " + haircut + " and " + additionalService);
-        pService.appendChild(txtService);
+  // Create p elements of class card-text.
+  // name
+  var pName = document.createElement("P");
+  pName.setAttribute("class", "card-text");
+  var txtName = document.createTextNode("Name: " + appmt.name);
+  pName.appendChild(txtName);
 
-        // dealsOrSpecials
-        var pDealsOrSpecials = document.createElement("P");
-        pDealsOrSpecials.setAttribute("class", "card-text");
-        var txtDealsOrSpecials = document.createTextNode("Deal / Special: " + dealsOrSpecial);
-        pDealsOrSpecials.appendChild(txtDealsOrSpecials);
+  // appointment time
+  var pTime = document.createElement("P");
+  pTime.setAttribute("class", "card-text");
+  var txtTime = document.createTextNode("Appointment: " + appmt.startTime + " - " + appmt.endTime);
+  pTime.appendChild(txtTime);
 
-        // key
-        var pKey = document.createElement("P");
-        pKey.setAttribute("class", "card-text");
-        pKey.setAttribute("id", "cancellationKey");
-        pKey.setAttribute("value", key);
-        var txtKey = document.createTextNode("Appointment Key: " + key);
-        pKey.appendChild(txtKey);
+  // haircut and additional services
+  var pService = document.createElement("P");
+  pService.setAttribute("class", "card-text");
+  var txtService = document.createTextNode("Service: " + appmt.haircut + " and " + appmt.additionalService);
+  pService.appendChild(txtService);
 
-        // create delete button
-        var btnDelete = document.createElement("BUTTON");
-        var txtLabel = document.createTextNode("Delete Appointment");
-        btnDelete.setAttribute("class", "btn btn-primary")
-        btnDelete.setAttribute("type", "button")
-        btnDelete.setAttribute("onclick", "deleteAppointment(" + key + ")")
-        btnDelete.appendChild(txtLabel);
+  // dealsOrSpecials
+  var pDealsOrSpecials = document.createElement("P");
+  pDealsOrSpecials.setAttribute("class", "card-text");
+  var txtDealsOrSpecials = document.createTextNode("Deal / Special: " + appmt.dealsOrSpecial);
+  pDealsOrSpecials.appendChild(txtDealsOrSpecials);
 
-        // linebreak
-        var br = document.createElement("BR");
+  // key
+  var pKey = document.createElement("P");
+  pKey.setAttribute("class", "card-text");
+  pKey.setAttribute("id", "cancellationKey");
+  pKey.setAttribute("value", appmt.key);
+  var txtKey = document.createTextNode("Appointment Key: " + appmt.key);
+  pKey.appendChild(txtKey);
 
-        // Compose card
-        divBody.appendChild(pName);
-        divBody.appendChild(pTime);
-        divBody.appendChild(pService);
-        divBody.appendChild(pDealsOrSpecials);
-        divBody.appendChild(pKey);
-        divBody.appendChild(btnDelete);
-        divCard.appendChild(h5);
-        divCard.appendChild(divBody);
+  // create delete button
+  var btnDelete = document.createElement("BUTTON");
+  var txtLabel = document.createTextNode("Delete Appointment");
+  btnDelete.setAttribute("class", "btn btn-primary")
+  btnDelete.setAttribute("type", "button")
+  btnDelete.setAttribute("onclick", "deleteAppointment('" + appmt.key + "')")
+  btnDelete.appendChild(txtLabel);
 
-        // Add card and spacing to DOM
-        var appointmentContainer = document.getElementById("prime");
-        appointmentContainer.appendChild(divCard);
-        appointmentContainer.appendChild(br);
-      })
-    }
+  // Compose card
+  divBody.appendChild(pName);
+  divBody.appendChild(pTime);
+  divBody.appendChild(pService);
+  divBody.appendChild(pDealsOrSpecials);
+  divBody.appendChild(pKey);
+  divBody.appendChild(btnDelete);
+  divCard.appendChild(h5);
+  divCard.appendChild(divBody);
+  return divCard;
+}
+
 
   </Script>
 </body>

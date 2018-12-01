@@ -63,9 +63,11 @@ app.route('/api/appointments')
       })
       // DELETE REQUEST
       .delete((req, res) => {
+        console.log("RECEIVED DELETE REQUEST FOR KEY: " + req.body.key);
         mongoOp.deleteOne({key: req.body.key}, (err)=> {
           if(err) {
             console.log("Error deleting key: " + req.body.key);
+            res.send("DELETE REQUEST ENCOUNTERED ERROR");
           }
           else {
             res.send("SUCCESSFULLY DELETED APPOINTMENT");
