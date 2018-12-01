@@ -26,7 +26,8 @@ app.route('/api/appointments')
       // GET REQUEST
       .get((req, res) => {
         //res.json(appointments);
-        mongoOp.find({}, (err, data) => {
+        //mongoOp.find({}, {"sort": ['start', 'asc']}, (err, data) => {
+        mongoOp.find().sort({"start":1}).exec((err, data) => {
           if(!err) {
             res.json(data);
           }
