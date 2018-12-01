@@ -66,8 +66,13 @@
   <script>
     $.get("/api/appointments").then(res => displayAppointments(res));
 
-    function deleteAppointment(key) {
-
+    function deleteAppointment(k) {
+      $.ajax({
+        type: 'DELETE',
+        url: '/api/appointments',
+        data: { "key": k },
+        datatype: 'application/json'
+      })
     }
 
     function displayAppointments(appointmentsArray) {
@@ -81,8 +86,6 @@
         var appointmentDuration = appointment["duration"];
         var dealsOrSpecial = appointment["deals"];
         var key = appointment["key"];
-
-
 
         // Create div element, class card.
         var divCard = document.createElement("div");
@@ -105,19 +108,13 @@
         var txtName = document.createTextNode("Name: " + name);
         pName.appendChild(txtName);
 
-        // key
-        var pKey = document.createElement("P");
-        pKey.setAttribute("class", "card-text");
-        var txtKey = document.createTextNode("Appointment Key: " + key);
-        pKey.appendChild(txtKey);
-
-        // Appointment time
+        // appointment time
         var pTime = document.createElement("P");
         pTime.setAttribute("class", "card-text");
         var txtTime = document.createTextNode("Appointment: " + startTime + " - " + endTime);
         pTime.appendChild(txtTime);
 
-        //haircut and additional services
+        // haircut and additional services
         var pService = document.createElement("P");
         pService.setAttribute("class", "card-text");
         var txtService = document.createTextNode("Service: " + haircut + " and " + additionalService);
@@ -129,7 +126,13 @@
         var txtDealsOrSpecials = document.createTextNode("Deal / Special: " + dealsOrSpecial);
         pDealsOrSpecials.appendChild(txtDealsOrSpecials);
 
-        // hidden field for key 
+        // key
+        var pKey = document.createElement("P");
+        pKey.setAttribute("class", "card-text");
+        pKey.setAttribute("id", "cancellationKey");
+        pKey.setAttribute("value", key);
+        var txtKey = document.createTextNode("Appointment Key: " + key);
+        pKey.appendChild(txtKey);
 
         // create delete button
         var btnDelete = document.createElement("BUTTON");
@@ -138,6 +141,9 @@
         btnDelete.setAttribute("type", "button")
         btnDelete.setAttribute("onclick", "deleteAppointment(" + key + ")")
         btnDelete.appendChild(txtLabel);
+
+        // linebreak
+        var br = document.createElement("BR");
 
         // Compose card
         divBody.appendChild(pName);
@@ -149,9 +155,12 @@
         divCard.appendChild(h5);
         divCard.appendChild(divBody);
 
-        // Add card to DOM
-        document.getElementById("prime").appendChild(divCard);
+        // Add card and spacing to DOM
+        var appointmentContainer = document.getElementById("prime");
+        appointmentContainer.appendChild(divCard);
+        appointmentContainer.appendChild(br);
       })
     }
+
   </Script>
 </body>
