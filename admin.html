@@ -66,7 +66,7 @@
   <script>
     $.get("/api/appointments").then(res => displayAppointments(res));
 
-    function delete (key) {
+    function deleteAppointment(key) {
 
     }
 
@@ -136,7 +136,7 @@
         var txtLabel = document.createTextNode("Delete Appointment");
         btnDelete.setAttribute("class", "btn btn-primary")
         btnDelete.setAttribute("type", "button")
-        btnDelete.setAttribute("onclick", "delete(" + key + ")")
+        btnDelete.setAttribute("onclick", "deleteAppointment(" + key + ")")
         btnDelete.appendChild(txtLabel);
 
         // Compose card
