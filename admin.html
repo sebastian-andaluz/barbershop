@@ -65,6 +65,11 @@
     $.get("/api/appointments").then(res => displayAppointments(res));
 
 function deleteAppointment(k) {
+  // Remove card from DOM
+  let divCard = document.querySelector(".cancel-key[value='" + k + "']").parentNode.parentNode
+  var appointmentContainer = document.getElementById("prime");
+  appointmentContainer.removeChild(divCard);
+
   $.ajax({
     type: 'DELETE',
     url: '/api/appointments',
@@ -141,8 +146,7 @@ function generateCard(appmt) {
 
   // key
   var pKey = document.createElement("P");
-  pKey.setAttribute("class", "card-text");
-  pKey.setAttribute("id", "cancellationKey");
+  pKey.setAttribute("class", "card-text cancel-key");
   pKey.setAttribute("value", appmt.key);
   var txtKey = document.createTextNode("Appointment Key: " + appmt.key);
   pKey.appendChild(txtKey);
