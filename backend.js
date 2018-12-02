@@ -40,12 +40,12 @@ app.route('/api/appointments')
       .post((req, res) => {
         console.log(req.body);
         var db = new mongoOp();
-        db.name = req.body.title;
+        db.name = req.body.name;
         db.haircut = req.body.haircut;
-        db.deals = req.body.dealsOrService;
-        db.addOns = req.body.additionalService;
+        db.deals = req.body.deals;
+        db.addOns = req.body.addOns;
         db.start = req.body.start;
-        db.duration = req.body.appointmentDuration;
+        db.duration = req.body.duration;
         db.end = req.body.end;
         db.key = req.body.key;
         db.save((err, appointment) => {

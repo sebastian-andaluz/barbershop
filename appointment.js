@@ -18,6 +18,7 @@ function populateCalendarWithAppointments() {
     }
     calendarAppointments.push(calendarApt);
   })
+  $("#calendar").fullCalendar('removeEventSources');
   $("#calendar").fullCalendar('addEventSource', calendarAppointments);
 }
 
@@ -49,7 +50,17 @@ function dayClickIsAgendaDay(date, jsEvent, view){
   this.date = date;
   this.jsEvent = jsEvent;
   this.view = view;
-  $('#popupModal').modal('show');
+
+  var time = moment({h: date.hours(), m: date.minutes()});
+  var beforeTime = moment("7:30", "hh:mm");
+  var afterTime = moment("18:00", "hh:mm");
+  console.log(beforeTime);
+  console.log(time);
+  console.log(afterTime);
+  if(time.isBetween(beforeTime, afterTime, null, '[)')) {
+    console.log("VALID");
+    $('#popupModal').modal('show');
+  }
 }
 
 function dayClickIsMonth(date, jsEvent, view){
@@ -79,38 +90,27 @@ function scheduleServiceClicked(){
   let endString = JSON.stringify(end);
 
   var appointment = {
-    "title":title,
+    "name":title,
     "haircut":haircut,
-    "dealsOrSpecial":dealsOrSpecial,
-    "additionalService":additionalService,
-    "appointmentDuration":appointmentDuration,
+    "deals":dealsOrSpecial,
+    "addOns":additionalService,
+    "duration":appointmentDuration,
     "key":key,
     "start":start.toDate(),
     "end":end.toDate()
   }
-
-  //set appointment
-
-  //get appointment
-
   $.post("/api/appointments", appointment);
 
   $('#popupModal').modal('hide');
-
-  //alert(this.getServicesDuration(additionalService));
-
   document.getElementById("cancelKey").innerHTML = key;
 
   $('#keyModal').modal('show');
 
 
-  $('#calendar').fullCalendar('renderEvent', {
-    title: title + ": " + haircut + ' & ' + additionalService,
-    start: start,
-    end: end,
-    allDay: false,
-
-  });
+  appointment.start = start; 
+  appointment.end = end;
+  appointments.push(appointment);
+  populateCalendarWithAppointments();
 
   document.getElementById('customerName').value = '';
   document.getElementById('haircuts').value = '';
