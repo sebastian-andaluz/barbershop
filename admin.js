@@ -1,18 +1,19 @@
 $.get("/api/appointments").then(res => displayAppointments(res));
 
 function deleteAppointment(k) {
-  // Remove card from DOM
-  let divCard = document.querySelector(".cancel-key[value='" + k + "']").parentNode.parentNode
-  var appointmentContainer = document.getElementById("prime");
-  appointmentContainer.removeChild(divCard);
+  if(confirm("Are you sure you want to delete this appointment?")) {
+    // Remove card from DOM
+    let divCard = document.querySelector(".cancel-key[value='" + k + "']").parentNode.parentNode
+    var appointmentContainer = document.getElementById("prime");
+    appointmentContainer.removeChild(divCard);
 
-  $.ajax({
-    type: 'DELETE',
-    url: '/api/appointments',
-    data: { "key": k },
-    datatype: 'application/json'
-  })
-  //location.reload();
+    $.ajax({
+      type: 'DELETE',
+      url: '/api/appointments',
+      data: { "key": k },
+      datatype: 'application/json'
+    })
+  }
 }
 
 function editAppointment(a) {
@@ -79,7 +80,7 @@ function generateCard(appointment) {
 
   // Create div element, class card.
   var divCard = document.createElement("div");
-  divCard.setAttribute("class", "card d-inline-flex");
+  divCard.setAttribute("class", "card d-inline-flex bg-dark text-white ml-2 mr-2 mt-2 mb-2");
 
   // Create h5 element of class card-header.
   var h5 = document.createElement("h5");
