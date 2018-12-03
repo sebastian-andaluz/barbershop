@@ -68,7 +68,7 @@ function generateCard(appointment) {
   let appmt = {
     date: moment(appointment["start"]).format('LL'),
     name: appointment["name"],
-    startTime: moment(appointment["start"]).format('LL'),
+    startTime: moment(appointment["start"]).format('LT'),
     endTime: moment(appointment["end"]).format('LT'),
     haircut: appointment["haircut"],
     additionalService: appointment["addOns"],
@@ -125,16 +125,16 @@ function generateCard(appointment) {
 
   // Create delete button
   var btnDelete = document.createElement("BUTTON");
-  var txtLabel = document.createTextNode("Delete Appointment");
-  btnDelete.setAttribute("class", "btn btn-danger")
+  var txtLabel = document.createTextNode("Delete");
+  btnDelete.setAttribute("class", "btn btn-danger mr-1")
   btnDelete.setAttribute("type", "button")
   btnDelete.setAttribute("onclick", "deleteAppointment('" + appmt.key + "')")
   btnDelete.appendChild(txtLabel);
 
   // Create delete button
   var btnEdit = document.createElement("BUTTON");
-  var txtLabel = document.createTextNode("Edit Appointment");
-  btnEdit.setAttribute("class", "btn btn-warning")
+  var txtLabel = document.createTextNode("Edit");
+  btnEdit.setAttribute("class", "btn btn-warning ml-1")
   btnEdit.setAttribute("type", "button")
   btnEdit.setAttribute("onclick", "editAppointment(" + JSON.stringify(appointment) + ")")
   btnEdit.appendChild(txtLabel);
