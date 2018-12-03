@@ -33,9 +33,47 @@
   </section>
   <section class="bg-secondary container-fluid justify-content-center">
     <div class="row">
-      <div id="prime" class="flex-wrap col-8" style="margin: auto"> </div>
+      <div id="prime" class="flex-wrap col-8 text-center" style="margin: auto"> </div>
     </div>
   </section>
+
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editModalLabel">Edit Appointment</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <label class="col-3" for="">Name:</label>
+            <input type="text" id="name"/> <br/>
+            <label class="col-3" for="">Haircut:</label>
+            <input type="text" id="haircut"/> <br/>
+            <label class="col-3" for="">Addons:</label>
+            <input type="text" id="addons"/> <br/>
+            <label class="col-3" for="">Deals:</label>
+            <input type="text" id="deals"/> <br/>
+            <label class="col-3" for="">Duration:</label>
+            <input type="text" id="duration"/> <br/>
+            <label class="col-3" for="">Start:</label>
+            <input type="text" id="start"/> <br/>
+            <label class="col-3" for="">End:</label>
+            <input type="text" id="end"/> <br/>
+            <label class="col-3" for="">Key:</label>
+            <input type="text" disabled id="key"/> <br/>
+            <button type="button" class="btn btn-success float-right mt-2" onclick="acceptEdit()">
+              Change
+            </button>
+            <button type="button" class="btn btn-danger float-right mt-2" onclick="cancelEdit()">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <script src="js/creative.min.js"></script>

@@ -75,6 +75,28 @@ app.route('/api/appointments')
           }
         });
       })
+      // PUT REQUEST
+      .put((req, res) => {
+        console.log("RECEIVED PUT REQUEST FOR KEY: " + req.body.key);
+        try {
+          mongoOp.updateOne(
+            { key: req.body.key }, 
+            { 
+              name: req.body.name, 
+              haircut: req.body.haircut, 
+              deals: req.body.deals,
+              addOns: req.body.addOns,
+              start: req.body.start,
+              end: req.body.end,
+              duration: req.body.duration
+            }).then(
+              (data) => res.send("UPDATE SUCCESSFUL")
+            )
+        } catch (e) {
+          console.log("ERROR WHEN UPDATING KEY: " + req.body.key);
+          res.send("ENCOUNTERED ERROR DURING UPDATE");
+        }
+      })
 
 app.listen(port, () => {
         console.log("Running backend");

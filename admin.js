@@ -15,26 +15,47 @@ function deleteAppointment(k) {
   //location.reload();
 }
 
+function editAppointment(a) {
+  console.log(a);
+  $("#name").val(a.name)
+  $("#haircut").val(a.haircut)
+  $("#addOns").val(a.addOns)
+  $("#deals").val(a.deals)
+  $("#duration").val(a.duration)
+  $("#start").val(a.start)
+  $("#end").val(a.end)
+  $("#key").val(a.key)
+  $("#editModal").modal('show');
+}
+
+function cancelEdit() {
+  $("#editModal").modal('hide');
+}
+
+function acceptEdit() {
+  let apt = {
+    key: $("#key").val(),
+    name: $("#name").val(),
+    haircut: $("#haircut").val(),
+    addOns: $("#addOns").val(),
+    deals: $("#deals").val(),
+    duration: $("#duration").val(),
+    start: $("#start").val(),
+    end: $("#end").val(),
+  }
+  $.ajax({
+    type: 'PUT',
+    url: '/api/appointments',
+    data: apt,
+    datatype: 'application/json'
+  })
+  $("#editModal").modal('hide');
+}
+
 function displayAppointments(appointmentsArray) {
   appointmentsArray.forEach((appointment) => {
-    let appmt = {
-      date: moment(appointment["start"]).format('LL'),
-      name: appointment["name"],
-      startTime: moment(appointment["start"]).format('LL'),
-      endTime: moment(appointment["end"]).format('LT'),
-      haircut: appointment["haircut"],
-      additionalService: appointment["addOns"],
-      appointmentDuration: appointment["duration"],
-      dealsOrSpecial: appointment["deals"],
-      key: appointment["key"]
-    }
 
-    let divCard = generateCard(appmt);
-
-    /*
-    // linebreak
-    var br = document.createElement("BR");
-    */
+    let divCard = generateCard(appointment);
 
     // Add card and spacing to DOM
     var appointmentContainer = document.getElementById("prime");
@@ -43,7 +64,19 @@ function displayAppointments(appointmentsArray) {
   })
 }
 
-function generateCard(appmt) {
+function generateCard(appointment) {
+  let appmt = {
+    date: moment(appointment["start"]).format('LL'),
+    name: appointment["name"],
+    startTime: moment(appointment["start"]).format('LL'),
+    endTime: moment(appointment["end"]).format('LT'),
+    haircut: appointment["haircut"],
+    additionalService: appointment["addOns"],
+    appointmentDuration: appointment["duration"],
+    dealsOrSpecial: appointment["deals"],
+    key: appointment["key"]
+  }
+
   // Create div element, class card.
   var divCard = document.createElement("div");
   divCard.setAttribute("class", "card d-inline-flex");
@@ -93,10 +126,18 @@ function generateCard(appmt) {
   // Create delete button
   var btnDelete = document.createElement("BUTTON");
   var txtLabel = document.createTextNode("Delete Appointment");
-  btnDelete.setAttribute("class", "btn btn-primary")
+  btnDelete.setAttribute("class", "btn btn-danger")
   btnDelete.setAttribute("type", "button")
   btnDelete.setAttribute("onclick", "deleteAppointment('" + appmt.key + "')")
   btnDelete.appendChild(txtLabel);
+
+  // Create delete button
+  var btnEdit = document.createElement("BUTTON");
+  var txtLabel = document.createTextNode("Edit Appointment");
+  btnEdit.setAttribute("class", "btn btn-warning")
+  btnEdit.setAttribute("type", "button")
+  btnEdit.setAttribute("onclick", "editAppointment(" + JSON.stringify(appointment) + ")")
+  btnEdit.appendChild(txtLabel);
 
   // Compose card
   divBody.appendChild(pName);
@@ -105,6 +146,7 @@ function generateCard(appmt) {
   divBody.appendChild(pDealsOrSpecials);
   divBody.appendChild(pKey);
   divBody.appendChild(btnDelete);
+  divBody.appendChild(btnEdit);
   divCard.appendChild(h5);
   divCard.appendChild(divBody);
   return divCard;
