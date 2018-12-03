@@ -12,3 +12,27 @@
   background-color: #212529 !important;
   padding: 5% 0%;
 }
+
+.content-row {
+    display: flex;
+    color: white;
+}
+
+.content-row-1{
+    padding : 24px;
+}
+
+
+.content-row-2 {
+    padding: 24px;
+}
+
+.content-row-2-header{
+    font-size : 28px;
+    font-weight : bold;
+}
+
+.about-img-main {
+    width: 500px;
+    height: 700px;
+}
