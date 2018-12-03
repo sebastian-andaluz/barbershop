@@ -127,7 +127,7 @@ function generateCard(appointment) {
   // Create delete button
   var btnDelete = document.createElement("BUTTON");
   var txtLabel = document.createTextNode("Delete");
-  btnDelete.setAttribute("class", "btn btn-danger mr-1")
+  btnDelete.setAttribute("class", "btn btn-danger mr-3")
   btnDelete.setAttribute("type", "button")
   btnDelete.setAttribute("onclick", "deleteAppointment('" + appmt.key + "')")
   btnDelete.appendChild(txtLabel);
@@ -135,7 +135,7 @@ function generateCard(appointment) {
   // Create delete button
   var btnEdit = document.createElement("BUTTON");
   var txtLabel = document.createTextNode("Edit");
-  btnEdit.setAttribute("class", "btn btn-warning ml-1")
+  btnEdit.setAttribute("class", "btn btn-warning ml-3")
   btnEdit.setAttribute("type", "button")
   btnEdit.setAttribute("onclick", "editAppointment(" + JSON.stringify(appointment) + ")")
   btnEdit.appendChild(txtLabel);
